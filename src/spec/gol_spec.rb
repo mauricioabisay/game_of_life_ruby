@@ -8,6 +8,20 @@ describe 'Game of Life' do
     it 'create a new Cell object' do
       expect(subject).to be_instance_of Cell
     end
+    it 'check if cell is alive' do
+      expect(subject).to respond_to(:alive)
+      expect(subject.alive).to equal(false)
+      expect(subject).to respond_to(:isAlive?)
+      expect(subject.isAlive?).to equal(false)
+    end
+    it 'has current cell row' do
+      expect(subject).to respond_to(:row)
+      expect(subject.row).to be_instance_of Integer
+    end
+    it 'has current cell column' do
+      expect(subject).to respond_to(:col)
+      expect(subject.col).to be_instance_of Integer
+    end
   end
 
   context 'Grid' do
