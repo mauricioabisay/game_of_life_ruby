@@ -61,6 +61,19 @@ describe 'Game of Life' do
     it 'create a new Game object' do
       expect(subject).to be_instance_of GameOfLife
     end
+    it 'has a grid' do
+      expect(subject.grid).to be_instance_of Grid
+    end
+    it 'has alive seed cells array' do
+      expect(subject.seedCells).to be_instance_of Array
+    end
+    it 'seed alive cells into the grid' do
+      game = GameOfLife.new(Grid.new, [ [1,1], [2,2] ])
+      cell = game.grid.cells[1][1]
+      expect(cell.isAlive?).to equal(true)
+      expect(game.grid.neighbours_alive_counter(cell)).to equal(1)
+      expect(game.grid.cells[2][2].alive).to equal(true)
+    end
   end
 
 end
