@@ -29,6 +29,31 @@ describe 'Game of Life' do
     it 'create a new Grid object' do
       expect(subject).to be_instance_of Grid
     end
+    it 'has rows' do
+      expect(subject).to respond_to(:rows)
+      expect(subject.rows).to be_instance_of Integer
+    end
+    it 'has cols' do
+      expect(subject).to respond_to(:cols)
+      expect(subject.cols).to be_instance_of Integer
+    end
+    it 'has a cells matrix' do
+      expect(subject).to respond_to(:cells)
+      expect(subject.cells).to be_instance_of Array
+      expect(subject.cells.length()).to equal(subject.rows)
+      subject.cells.each do |row|
+        expect(row).to be_instance_of Array
+        expect(row.length()).to equal(subject.cols)
+        row.each do |col|
+          expect(col).to be_instance_of Cell
+        end
+      end
+    end
+    it 'has a neighbours counter' do
+      expect(subject).to respond_to(:neighbours_alive_counter)
+      expect(subject.neighbours_alive_counter).to be_instance_of Integer
+      expect(subject.neighbours_alive_counter(subject.cells[-1][-1])).to be_instance_of Integer
+    end
   end
 
   context 'Game' do
