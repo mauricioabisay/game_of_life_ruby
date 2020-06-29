@@ -76,4 +76,46 @@ describe 'Game of Life' do
     end
   end
 
+  context 'Rules' do
+    let!(:game) {GameOfLife.new}
+    context "Underpopulation: fewer than 2 live neighbours dies" do
+      it '1 live neighbour' do
+        game = GameOfLife.new(Grid.new, [ [0,0], [1,0] ])
+        expect(game.grid.cells[0][0].isAlive?).to equal(true)
+        expect(game.grid.cells[1][0].isAlive?).to equal(true)
+      end
+    end
+    context "Overcrowding: more than 3 live neighbours dies" do
+      it '4 live neighbour' do
+        game = GameOfLife.new(Grid.new, [ [0,0], [0,1], [0,2], [1,0] ])
+        expect(game.grid.cells[0][0].isAlive?).to equal(true)
+        expect(game.grid.cells[0][1].isAlive?).to equal(true)
+        expect(game.grid.cells[0][2].isAlive?).to equal(true)
+        expect(game.grid.cells[1][0].isAlive?).to equal(true)
+      end
+    end
+    context "2 or 3 live neighbours lives" do
+      it '2 live neighbours' do
+        game = GameOfLife.new(Grid.new, [ [0,0], [0,2] ])
+        expect(game.grid.cells[0][0].isAlive?).to equal(true)
+        expect(game.grid.cells[0][2].isAlive?).to equal(true)
+      end
+      it '3 live neighbour' do
+        game = GameOfLife.new(Grid.new, [ [0,0], [0,1], [0,2] ])
+        expect(game.grid.cells[0][0].isAlive?).to equal(true)
+        expect(game.grid.cells[0][1].isAlive?).to equal(true)
+        expect(game.grid.cells[0][2].isAlive?).to equal(true)
+      end
+    end
+    context "dead cell with exactly 3 live neighbours becomes a live cell." do
+      it '3 live neighbour' do
+        game = GameOfLife.new(Grid.new, [ [0,0], [0,1], [0,2] ])
+        expect(game.grid.cells[0][0].isAlive?).to equal(true)
+        expect(game.grid.cells[0][1].isAlive?).to equal(true)
+        expect(game.grid.cells[0][2].isAlive?).to equal(true)
+        expect(game.grid.cells[1][1].isAlive?).to equal(false)
+      end
+    end
+  end
+
 end
