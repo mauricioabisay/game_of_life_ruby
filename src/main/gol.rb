@@ -6,7 +6,9 @@ class GameOfLife
     @grid = grid
     @seedCells = seedCells
     @seedCells.each do |aliveCell|
-      @grid.cells[aliveCell[0]][aliveCell[1]].alive = true
+      if aliveCell[0] >= 0 && aliveCell[0] < @grid.rows && aliveCell[1] >= 0 && aliveCell[1] < @grid.cols
+        @grid.cells[aliveCell[0]][aliveCell[1]].alive = true
+      end
     end
   end
 
