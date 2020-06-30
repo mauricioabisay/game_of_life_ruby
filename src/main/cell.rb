@@ -9,4 +9,9 @@ class Cell
   def isAlive?
     @alive
   end
+
+  def to_s
+    @alive ? '1' : '0'
+  end
+
 end
