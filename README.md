@@ -17,6 +17,20 @@ Game of Life implementation in Ruby
 docker-compose run app
 ```
 
+#### Extra parameters
+
+You may alter the default execution by providing the following parameters
+
++ **-r** indicate with an integer the rows for the grid
++ **-c** indicate with an integer the columns for the grid
++ **[i,j]** indicate with an integer pair separted by a comma the starting alive cells for the grid, starting from 0
+
+Example
+
+```bash
+docker-compose run app ruby ./main/main.rb -r6 -c6 [0,0] [0,1] [1,0] [4,4] [4,5] [5,5]
+```
+
 ## Contact
 
 mauricioabisay.lopez@gmail.com
